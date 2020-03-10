@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Graph from "./Graph";
 
 import Toolbar from './components/Toolbar/Toolbar';
 import SideDrawer from './components/SideDrawer/SideDrawer';
@@ -33,10 +34,15 @@ class App extends Component {
                 <main style={{marginTop: '64px'}}>
                     <p> page content</p>
                 </main>
+                <h1 style={{textAlign: 'center'}}>March 9th, 2020</h1>
+                <div className="Graph">
 
+                    <Graph></Graph>
+                </div>
             </div>
         );
     }
+
 }
 
 export default App;
