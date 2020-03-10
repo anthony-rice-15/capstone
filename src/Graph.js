@@ -1,23 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries} from 'react-vis';
+import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries, VerticalGridLines} from 'react-vis';
 
-const Graph = () => {
+const Graph = (props) => {
     return (
         <XYPlot
+            xType="ordinal"
             width={300}
             height={300}>
             <HorizontalGridLines />
+            <VerticalGridLines/>
             <VerticalBarSeries
                 data={[
-                    {x: 1, y: 26},
-                    {x: 2, y: 9},
-                    {x: 3, y: 21},
-                    {x: 4, y: 31},
-                    {x: 5, y: 26},
-                    {x: 6, y: 9},
-                    {x: 7, y: 21},
-                    {x: 8, y: 31}
+                    {x: "MFF", y: 18},
+                    {x: "CT", y: 10},
+                    {x: "PLM", y: 6},
+                    {x: "HWR", y: 11},
+                    {x: "MPR1", y: 11},
+                    {x: "MPR2", y: 26}
                 ]}/>
             <XAxis />
             <YAxis />

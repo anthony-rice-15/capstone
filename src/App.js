@@ -35,6 +35,7 @@ class App extends Component {
                     <p> page content</p>
                 </main>
                 <h1 style={{textAlign: 'center'}}>March 9th, 2020</h1>
+                <h2 style={{textAlign: 'center'}}>9:31:59PM</h2>
                 <div className="Graph">
 
                     <Graph></Graph>
