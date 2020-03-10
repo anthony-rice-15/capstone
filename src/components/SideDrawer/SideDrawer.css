@@ -9,6 +9,7 @@
     max-width: 400px;
     z-index: 200;
     transform: translateX(-100%);
+    transtition: transform 0.3s ease-out;
 }
 
 .side_drawer.open {
@@ -37,4 +38,10 @@
 .side_drawer a:hover,
 .side_drawer a:active {
     color: green;
+}
+
+@media (min-width: 769px) {
+    .side_drawer {
+        display: none;
+    }
 }
