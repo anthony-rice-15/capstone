@@ -1,4 +1,4 @@
-import { Stitch } from "mongo-stitch-browser-sdk";
+import { Stitch } from "mongodb-stitch-react-native-sdk";
 
 const APP_ID = "freemanfreetime-nxcyw";
 
