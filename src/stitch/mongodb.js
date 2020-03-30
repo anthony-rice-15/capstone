@@ -1,8 +1,8 @@
 import { RemoteMongoClient } from "mongodb-stitch-browser-sdk";
 import { app } from "./app";
 
-const mongoClient = app.getServiceClient(RemoteMongoClient.factory,"mongodb-atlas");
+const mongoClient = app.getServiceClient(RemoteMongoClient.factory,"freemanfreetime-atlas");
 
-const items = mongoClient.db("todo").collection("items");
+const data = mongoClient.db("freemanData").collection("fData");
 
-export {items};
+export {data};
