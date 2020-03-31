@@ -1,7 +1,7 @@
 import React from 'react';
 import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries, VerticalGridLines} from 'react-vis';
 
-const Graph = (props) => {
+const GraphSmall = (props) => {
     return (
         <XYPlot
             xType="ordinal"
@@ -24,4 +24,4 @@ const Graph = (props) => {
     );
 };
 
-export default Graph;
+export default GraphSmall;

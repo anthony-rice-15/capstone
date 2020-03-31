@@ -3,6 +3,6 @@ import { app } from "./app";
 
 const mongoClient = app.getServiceClient(RemoteMongoClient.factory,"freemanfreetime-atlas");
 
-const data = mongoClient.db("freemanData").collection("fData");
+const data = mongoClient.db("googlesheetsdb").collection("gym_records");
 
 export {data};
