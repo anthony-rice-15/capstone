@@ -44,14 +44,15 @@ class App extends Component {
                 this.setState({data: response})
             });
         }
+        console.log(this.state.data);
+
+        //End initialization
 
         let backdrop = 1;
         if(this.state.sideDrawerOpen) {
             backdrop = <Backdrop click={this.backdropClickHandler}/>
         }
-        //This is where I'm trying to load the data for use in state
-        //Currently coming up with errors I can't solve.
-        //this.loadData(db);
+
         return (
             <div style={{height: '100%'}}>
                 <Toolbar drawerClickHandler={this.drawerToggleClickHandler}/>
@@ -60,15 +61,22 @@ class App extends Component {
                 <main style={{marginTop: '64px'}}>
 
                 </main>
-                <h1 style={{textAlign: 'center'}}>March 9th, 2020</h1>
-                <h2 style={{textAlign: 'center'}}>9:31:59PM</h2>
-                <div className="Graph">
-                    <Graph></Graph>
-                </div>
-                <div className="GraphSmall">
-                    <GraphSmall ></GraphSmall>
-                </div>
-                <About/>
+                    {this.state.data == null && <h1 style={{textAlign: 'center'}}>Loading...</h1>}
+                    {this.state.data != null && (
+                        <div className="MainContent">
+                        <h1 style={{textAlign: 'center'}}>March 9th, 2020</h1>
+                        <h2 style={{textAlign: 'center'}}>9:31:59PM</h2>
+                        <div className="Graph">
+                        <Graph></Graph>
+                        </div>
+                        <div className="GraphSmall">
+                        <GraphSmall ></GraphSmall>
+                        </div>
+                        <About/>
+                        </div>
+                    )}
+
+
             </div>
         );
     }
