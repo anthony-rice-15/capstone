@@ -11,13 +11,10 @@ import {Stitch, AnonymousCredential, RemoteMongoClient} from "mongodb-stitch-bro
 class App extends Component {
     state = {
       sideDrawerOpen: false,
-        data: []
-    };
-
-    //function for loading data from database using asynchronous call
-    loadData = async (db) => {
-        const response = await db.collection('gym_records').find({}).asArray();
-        this.setState({data: response});
+        data: null,
+        client: null,
+        db: null,
+        user: null
     }
 
     drawerToggleClickHandler = () => {
@@ -31,11 +28,22 @@ class App extends Component {
 
     render() {
         //Initialize client and database
-        const client = Stitch.initializeAppClient('freemanfreetime-nxcyw');
-        const db = client.getServiceClient(RemoteMongoClient.factory,"freemanfreetime-atlas").db("googlesheetsdb");
-        client.auth.loginWithCredential(new AnonymousCredential()).then(user => {
-            console.log(`logged in anonymously as user ${user.id}`)
-        });
+        if(this.state.client == null) {
+            this.setState({client: Stitch.initializeDefaultAppClient('freemanfreetime-nxcyw')});
+        }
+        if(this.state.db == null && this.state.client != null) {
+            this.setState({db: this.state.client.getServiceClient(RemoteMongoClient.factory,"freemanfreetime-atlas").db("googlesheetsdb")});
+        }
+        if(this.state.client != null && this.state.user == null) {
+            this.state.client.auth.loginWithCredential(new AnonymousCredential()).then(user => {
+                this.setState({user: user})
+            });
+        }
+        if(this.state.client != null && this.state.user != null && this.state.db != null && this.state.data == null) {
+            this.state.db.collection('gym_records').find({}).asArray().then(response => {
+                this.setState({data: response})
+            });
+        }
 
         let backdrop = 1;
         if(this.state.sideDrawerOpen) {
