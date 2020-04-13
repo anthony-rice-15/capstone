@@ -11,12 +11,12 @@ const Graph = (props) => {
             <VerticalGridLines/>
             <VerticalBarSeries
                 data={[
-                    {x: "MFF", y: 18},
-                    {x: "CT", y: 10},
-                    {x: "PLM", y: 6},
-                    {x: "HWR", y: 11},
-                    {x: "MPR1", y: 11},
-                    {x: "MPR2", y: 26}
+                    {x: "MFF", y: props.mff[props.mff.length -1]},
+                    {x: "CT", y: props.ct[props.ct.length -1]},
+                    {x: "PLM", y: props.plm[props.plm.length -1]},
+                    {x: "HWR", y: props.hwr[props.hwr.length -1]},
+                    {x: "MPR1", y: props.mpr1[props.mpr1.length -1]},
+                    {x: "MPR2", y: props.mpr2[props.mpr2.length -1]}
                 ]}/>
             <XAxis />
             <YAxis />

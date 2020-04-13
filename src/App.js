@@ -10,11 +10,18 @@ import {Stitch, AnonymousCredential, RemoteMongoClient} from "mongodb-stitch-bro
 
 class App extends Component {
     state = {
-      sideDrawerOpen: false,
+        sideDrawerOpen: false,
         data: null,
         client: null,
         db: null,
-        user: null
+        user: null,
+        timestamp: null,
+        cardiotheater: null,
+        mainfitnessfloor: null,
+        plateloadedmachines: null,
+        heavyweightroom: null,
+        mpr1: null,
+        mpr2: null
     }
 
     drawerToggleClickHandler = () => {
@@ -41,10 +48,32 @@ class App extends Component {
         }
         if(this.state.client != null && this.state.user != null && this.state.db != null && this.state.data == null) {
             this.state.db.collection('gym_records').find({}).asArray().then(response => {
+                let tmp1 = [];
+                let tmp2 = [];
+                let tmp3 = [];
+                let tmp4 = [];
+                let tmp5 = [];
+                let tmp6 = [];
+                let tmp7 = [];
+                for(let i = 0; i < response.length; i++) {
+                    tmp1.push(response[i].timestamp);
+                    tmp2.push(response[i].cardiotheater);
+                    tmp3.push(response[i].mainfitnessfloor);
+                    tmp4.push(response[i].plateloadedmachines);
+                    tmp5.push(response[i].heavyweightroom);
+                    tmp6.push(response[i].mpr1);
+                    tmp7.push(response[i].mpr2);
+                }
+                this.setState({timestamp: tmp1})
+                this.setState({cardiotheater: tmp2})
+                this.setState({mainfitnessfloor: tmp3})
+                this.setState({plateloadedmachines: tmp4})
+                this.setState({heavyweightroom: tmp5})
+                this.setState({mpr1: tmp6})
+                this.setState({mpr2: tmp7})
                 this.setState({data: response})
             });
         }
-        console.log(this.state.data);
 
         //End initialization
 
@@ -64,14 +93,13 @@ class App extends Component {
                     {this.state.data == null && <h1 style={{textAlign: 'center'}}>Loading...</h1>}
                     {this.state.data != null && (
                         <div className="MainContent">
-                        <h1 style={{textAlign: 'center'}}>March 9th, 2020</h1>
-                        <h2 style={{textAlign: 'center'}}>9:31:59PM</h2>
+                        <h1 style={{textAlign: 'center'}}>{this.state.timestamp[this.state.timestamp.length -1]}</h1>
                         <div className="Graph">
-                        <Graph></Graph>
+                        <Graph timestamp={this.state.timestamp} mff={this.state.mainfitnessfloor} ct={this.state.cardiotheater} plm={this.state.plateloadedmachines} hwr={this.state.heavyweightroom} mpr1={this.state.mpr1} mpr2={this.state.mpr2}></Graph>
                         </div>
-                        <div className="GraphSmall">
-                        <GraphSmall ></GraphSmall>
-                        </div>
+                        {/*<div className="GraphSmall">*/}
+                        {/*<GraphSmall ></GraphSmall>*/}
+                        {/*</div>*/}
                         <About/>
                         </div>
                     )}
