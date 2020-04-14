@@ -61,17 +61,21 @@ class App extends Component {
                     tmp3.push(response[i].mainfitnessfloor);
                     tmp4.push(response[i].plateloadedmachines);
                     tmp5.push(response[i].heavyweightroom);
-                    tmp6.push(response[i].mpr1);
-                    tmp7.push(response[i].mpr2);
+                    if(isNaN(response[i].mpr1)) {
+                        tmp6.push(0);
+                    }
+                    else {
+                        tmp6.push(response[i].mpr1);
+                    }
+                    if(isNaN(response[i].mpr2)) {
+                        tmp7.push(0);
+                    }
+                    else {
+                        tmp7.push(response[i].mpr2);
+                    }
+
                 }
-                this.setState({timestamp: tmp1})
-                this.setState({cardiotheater: tmp2})
-                this.setState({mainfitnessfloor: tmp3})
-                this.setState({plateloadedmachines: tmp4})
-                this.setState({heavyweightroom: tmp5})
-                this.setState({mpr1: tmp6})
-                this.setState({mpr2: tmp7})
-                this.setState({data: response})
+                this.setState({timestamp: tmp1, cardiotheater: tmp2, mainfitnessfloor: tmp3, plateloadedmachines: tmp4, heavyweightroom: tmp5, mpr1: tmp6, mpr2: tmp7, data: response})
             });
         }
 
@@ -93,13 +97,15 @@ class App extends Component {
                     {this.state.data == null && <h1 style={{textAlign: 'center'}}>Loading...</h1>}
                     {this.state.data != null && (
                         <div className="MainContent">
-                        <h1 style={{textAlign: 'center'}}>{this.state.timestamp[this.state.timestamp.length -1]}</h1>
-                        <div className="Graph">
-                        <Graph timestamp={this.state.timestamp} mff={this.state.mainfitnessfloor} ct={this.state.cardiotheater} plm={this.state.plateloadedmachines} hwr={this.state.heavyweightroom} mpr1={this.state.mpr1} mpr2={this.state.mpr2}></Graph>
+                        <Graph timestamp={this.state.timestamp} mff={this.state.mainfitnessfloor} ct={this.state.cardiotheater} plm={this.state.plateloadedmachines} hwr={this.state.heavyweightroom} mpr1={this.state.mpr1} mpr2={this.state.mpr2}/>
+                        <div style={{display: 'contents'}}>
+                                <GraphSmall mode="MFF" timestamp={this.state.timestamp} data={this.state.mainfitnessfloor}/>
+                                <GraphSmall mode="CT" timestamp={this.state.timestamp} data={this.state.cardiotheater}/>
+                                <GraphSmall mode="PLM" timestamp={this.state.timestamp} data={this.state.plateloadedmachines}/>
+                                <GraphSmall mode="HWR" timestamp={this.state.timestamp} data={this.state.heavyweightroom}/>
+                                <GraphSmall mode="MPR1" timestamp={this.state.timestamp} data={this.state.mpr1}/>
+                                <GraphSmall mode="MPR2" timestamp={this.state.timestamp} data={this.state.mpr2}></GraphSmall>
                         </div>
-                        {/*<div className="GraphSmall">*/}
-                        {/*<GraphSmall ></GraphSmall>*/}
-                        {/*</div>*/}
                         <About/>
                         </div>
                     )}
