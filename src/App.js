@@ -57,7 +57,28 @@ function convertTimestamp(timestamp) {
             break;
     }
 
-    return (day + '/' + month + '/' + year + ' ' + time);
+    return (month + '/' + day + '/' + year + ' ' + time);
+}
+
+function getDate(timestamp) {
+    let tmp = timestamp.split(' ');
+    return tmp[0];
+}
+
+function getTime(timestamp) {
+    let tmp = timestamp.split(' ');
+    return tmp[1];
+}
+
+function getTodaysData(timestamps, dataset) {
+    let tmp = [];
+    for(let i = 0; i < timestamps.length; i++) {
+        if(getDate(timestamps[i]) === '04/15/2020') {
+            tmp.push({x: new Date(timestamps[i]), y:dataset[i]})
+        }
+    }
+    console.log(tmp);
+    return tmp;
 }
 
 class App extends Component {
@@ -142,7 +163,7 @@ class App extends Component {
         return (
             <div style={{height: '100%'}}>
                 <Toolbar drawerClickHandler={this.drawerToggleClickHandler}/>
-                <SideDrawer show={this.state.sideDrawerOpen} />
+                <SideDrawer show={this.state.sideDrawerOpen}/>
                 {Backdrop}
                 <main style={{marginTop: '64px'}}>
 
@@ -151,13 +172,14 @@ class App extends Component {
                     {this.state.data != null && (
                         <div className="MainContent">
                         <Graph timestamp={this.state.timestamp} mff={this.state.mainfitnessfloor} ct={this.state.cardiotheater} plm={this.state.plateloadedmachines} hwr={this.state.heavyweightroom} mpr1={this.state.mpr1} mpr2={this.state.mpr2}/>
+                        <hr/>
                         <div style={{display: 'contents'}}>
-                                <GraphSmall mode="MFF" timestamp={this.state.timestamp} data={this.state.mainfitnessfloor}/>
-                                <GraphSmall mode="CT" timestamp={this.state.timestamp} data={this.state.cardiotheater}/>
-                                <GraphSmall mode="PLM" timestamp={this.state.timestamp} data={this.state.plateloadedmachines}/>
-                                <GraphSmall mode="HWR" timestamp={this.state.timestamp} data={this.state.heavyweightroom}/>
-                                <GraphSmall mode="MPR1" timestamp={this.state.timestamp} data={this.state.mpr1}/>
-                                <GraphSmall mode="MPR2" timestamp={this.state.timestamp} data={this.state.mpr2}></GraphSmall>
+                                <GraphSmall mode="MFF" data={getTodaysData(this.state.timestamp, this.state.mainfitnessfloor)}/>
+                                <GraphSmall mode="CT" data={getTodaysData(this.state.timestamp, this.state.cardiotheater)}/>
+                                <GraphSmall mode="PLM" data={getTodaysData(this.state.timestamp, this.state.plateloadedmachines)}/>
+                                <GraphSmall mode="HWR" data={getTodaysData(this.state.timestamp, this.state.heavyweightroom)}/>
+                                <GraphSmall mode="MPR1" data={getTodaysData(this.state.timestamp, this.state.mpr1)}/>
+                                <GraphSmall mode="MPR2" data={getTodaysData(this.state.timestamp, this.state.mpr2)}/>
                         </div>
                         <About/>
                         </div>

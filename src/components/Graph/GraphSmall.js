@@ -5,8 +5,9 @@ import {
     YAxis,
     HorizontalGridLines,
     VerticalGridLines,
-    HorizontalBarSeries
+    HorizontalBarSeries, LineSeries
 } from 'react-vis';
+import '../../../node_modules/react-vis/dist/style.css'
 
 const GraphSmall = (props) => {
     return (
@@ -19,29 +20,14 @@ const GraphSmall = (props) => {
             {props.mode === "MPR2" && <h2 style={{textAlign: 'center'}}>Multipurpose Room 2</h2>}
             <div className="GraphSmall">
                     <XYPlot
-                        yType="ordinal"
+                        xType="time"
                         width={400}
                         height={400}
-                        xDomain={[0,30]}
-                        margin={{left: "150"}}>
-                        <HorizontalGridLines />
-                        <VerticalGridLines/>
-
-                        <HorizontalBarSeries
-                            data={[
-                                {x: props.data[props.data.length -1], y: props.timestamp[props.timestamp.length -1]},
-                                {x: props.data[props.data.length -2], y: props.timestamp[props.timestamp.length -2]},
-                                {x: props.data[props.data.length -3], y: props.timestamp[props.timestamp.length -3]},
-                                {x: props.data[props.data.length -4], y: props.timestamp[props.timestamp.length -4]},
-                                {x: props.data[props.data.length -5], y: props.timestamp[props.timestamp.length -5]},
-                                {x: props.data[props.data.length -6], y: props.timestamp[props.timestamp.length -6]},
-                                {x: props.data[props.data.length -6], y: props.timestamp[props.timestamp.length -7]},
-                                {x: props.data[props.data.length -6], y: props.timestamp[props.timestamp.length -8]},
-                                {x: props.data[props.data.length -6], y: props.timestamp[props.timestamp.length -9]},
-                                {x: props.data[props.data.length -6], y: props.timestamp[props.timestamp.length -10]}
-                            ]}/>
-                        <XAxis />
-                        <YAxis />
+                        yDomain={[0, 30]}>
+                        <LineSeries
+                            data={props.data}/>
+                        <XAxis title="X Axis" tickTotal={4}/>
+                        <YAxis title="Y Axis"/>
                     </XYPlot>
             </div>
         </div>

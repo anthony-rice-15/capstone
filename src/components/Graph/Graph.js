@@ -4,12 +4,13 @@ import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries, VerticalGr
 const Graph = (props) => {
     return (
         <div>
+            <h1 style={{textAlign: 'center'}}>Last Updated:</h1>
             <h1 style={{textAlign: 'center'}}>{props.timestamp[props.timestamp.length -1]}</h1>
             <div className="Graph">
                 <XYPlot
                     xType="ordinal"
-                    width={300}
-                    height={300}
+                    width={400}
+                    height={400}
                     yDomain={[0,30]}>
                     <HorizontalGridLines />
                     <VerticalGridLines/>
