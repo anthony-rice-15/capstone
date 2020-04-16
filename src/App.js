@@ -8,6 +8,58 @@ import Backdrop from './components/Backdrop/Backdrop';
 import About from './components/About/About';
 import {Stitch, AnonymousCredential, RemoteMongoClient} from "mongodb-stitch-browser-sdk";
 
+function convertTimestamp(timestamp) {
+    let tmp = timestamp.split(' ');
+    let month = tmp[1];
+    let day = tmp[2];
+    let time = tmp[3];
+    let year = tmp[5];
+
+    switch(month) {
+        case 'Jan':
+            month = '01';
+            break;
+        case 'Feb':
+            month = '02';
+            break;
+        case 'Mar':
+            month = '03';
+            break;
+        case 'Apr':
+            month = '04';
+            break;
+        case 'May':
+            month = '05';
+            break;
+        case 'Jun':
+            month = '06';
+            break;
+        case 'Jul':
+            month = '07';
+            break;
+        case 'Aug':
+            month = '08';
+            break;
+        case 'Sep':
+            month = '09';
+            break;
+        case 'Oct':
+            month = '10';
+            break;
+        case 'Nov':
+            month = '11';
+            break;
+        case 'Dec':
+            month = '12';
+            break;
+        default:
+            month = '00';
+            break;
+    }
+
+    return (day + '/' + month + '/' + year + ' ' + time);
+}
+
 class App extends Component {
     state = {
         sideDrawerOpen: false,
@@ -56,7 +108,8 @@ class App extends Component {
                 let tmp6 = [];
                 let tmp7 = [];
                 for(let i = 0; i < response.length; i++) {
-                    tmp1.push(response[i].timestamp);
+                    let tmpstamp = convertTimestamp(response[i].timestamp);
+                    tmp1.push(tmpstamp);
                     tmp2.push(response[i].cardiotheater);
                     tmp3.push(response[i].mainfitnessfloor);
                     tmp4.push(response[i].plateloadedmachines);

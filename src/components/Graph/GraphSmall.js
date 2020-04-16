@@ -20,10 +20,10 @@ const GraphSmall = (props) => {
             <div className="GraphSmall">
                     <XYPlot
                         yType="ordinal"
-                        width={600}
+                        width={400}
                         height={400}
                         xDomain={[0,30]}
-                        margin={{left: "250"}}>
+                        margin={{left: "150"}}>
                         <HorizontalGridLines />
                         <VerticalGridLines/>
 
