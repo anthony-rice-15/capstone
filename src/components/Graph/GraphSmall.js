@@ -25,14 +25,14 @@ const GraphSmall = (props) => {
                         height={400}
                         yDomain={[0, 30]}>
                         <LineSeries
-                            data={props.data}/>
+                            data={props.data}
+                            color={"#0A2240"}/>
                         <XAxis title="X Axis" tickTotal={4}/>
                         <YAxis title="Y Axis"/>
                     </XYPlot>
             </div>
         </div>
-
     );
-};
+}
 
 export default GraphSmall;

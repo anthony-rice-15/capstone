@@ -11,7 +11,8 @@ const Graph = (props) => {
                     xType="ordinal"
                     width={400}
                     height={400}
-                    yDomain={[0,30]}>
+                    yDomain={[0,30]}
+                    color={"#0A2240"}>
                     <HorizontalGridLines />
                     <VerticalGridLines/>
                     <VerticalBarSeries
