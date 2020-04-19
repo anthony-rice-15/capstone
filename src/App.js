@@ -3,11 +3,12 @@ import './App.css';
 import Graph from "./components/Graph/Graph";
 import GraphSmall from "./components/Graph/GraphSmall";
 import Toolbar from './components/Toolbar/Toolbar';
-import SideDrawer from './components/SideDrawer/SideDrawer';
-import Backdrop from './components/Backdrop/Backdrop';
 import About from './components/About/About';
 import {Stitch, AnonymousCredential, RemoteMongoClient} from "mongodb-stitch-browser-sdk";
 
+/*
+Method to convert the time
+*/
 function convertTimestamp(timestamp) {
     let tmp = timestamp.split(' ');
     let month = tmp[1];
@@ -74,15 +75,15 @@ class App extends Component {
         mpr1: null,
         mpr2: null
     }
-
-    drawerToggleClickHandler = () => {
-        this.setState((prevState) => {
-            return {sideDrawerOpen: !prevState.sideDrawerOpen}
-        })
-    };
-    backdropClickHandler = () => {
-      this.setState({sideDrawerOpen: false})
-    };
+    //
+    // drawerToggleClickHandler = () => {
+    //     this.setState((prevState) => {
+    //         return {sideDrawerOpen: !prevState.sideDrawerOpen}
+    //     })
+    // };
+    // backdropClickHandler = () => {
+    //   this.setState({sideDrawerOpen: false})
+    // };
 
     render() {
         //Initialize client and database
@@ -125,21 +126,15 @@ class App extends Component {
                     else {
                         tmp7.push(response[i].mpr2);
                     }
-
                 }
                 this.setState({timestamp: tmp1, cardiotheater: tmp2, mainfitnessfloor: tmp3, plateloadedmachines: tmp4, heavyweightroom: tmp5, mpr1: tmp6, mpr2: tmp7, data: response})
             });
         }
-
         //End initialization
-
         return (
             <div style={{height: '100%'}}>
-
                 {<Toolbar drawerClickHandler={this.drawerToggleClickHandler}/>}
-
                 <main style={{marginTop: '64px'}}>
-
                 </main>
                     {this.state.data == null && <h1 style={{textAlign: 'center'}}>Loading...</h1>}
                     {this.state.data != null && (
@@ -153,9 +148,10 @@ class App extends Component {
                                 <GraphSmall mode="MPR1" timestamp={this.state.timestamp} data={this.state.mpr1}/>
                                 <GraphSmall mode="MPR2" timestamp={this.state.timestamp} data={this.state.mpr2}></GraphSmall>
                         </div>
-                        <About/>
                         </div>
                     )}
+                {/* TODO About information here */}
+                {<About/>}
             </div>
         );
     }
