@@ -8,6 +8,7 @@ import Backdrop from './components/Backdrop/Backdrop';
 import About from './components/About/About';
 import {Stitch, AnonymousCredential, RemoteMongoClient} from "mongodb-stitch-browser-sdk";
 
+
 function convertTimestamp(timestamp) {
     let tmp = timestamp.split(' ');
     let month = tmp[1];
@@ -56,7 +57,6 @@ function convertTimestamp(timestamp) {
             month = '00';
             break;
     }
-
     return (month + '/' + day + '/' + year + ' ' + time);
 }
 
@@ -97,14 +97,14 @@ class App extends Component {
         mpr2: null
     }
 
-    drawerToggleClickHandler = () => {
-        this.setState((prevState) => {
-            return {sideDrawerOpen: !prevState.sideDrawerOpen}
-        })
-    };
-    backdropClickHandler = () => {
-      this.setState({sideDrawerOpen: false})
-    };
+    // drawerToggleClickHandler = () => {
+    //     this.setState((prevState) => {
+    //         return {sideDrawerOpen: !prevState.sideDrawerOpen}
+    //     })
+    // };
+    // backdropClickHandler = () => {
+    //   this.setState({sideDrawerOpen: false})
+    // };
 
     render() {
         //Initialize client and database
@@ -121,6 +121,7 @@ class App extends Component {
         }
         if(this.state.client != null && this.state.user != null && this.state.db != null && this.state.data == null) {
             this.state.db.collection('gym_records').find({}).asArray().then(response => {
+                // temporary arrays hold the floors
                 let tmp1 = [];
                 let tmp2 = [];
                 let tmp3 = [];
@@ -129,42 +130,34 @@ class App extends Component {
                 let tmp6 = [];
                 let tmp7 = [];
                 for(let i = 0; i < response.length; i++) {
+                    // Converts the timestamp to be readable
                     let tmpstamp = convertTimestamp(response[i].timestamp);
+                    // Fills the floor's data from the database
                     tmp1.push(tmpstamp);
                     tmp2.push(response[i].cardiotheater);
                     tmp3.push(response[i].mainfitnessfloor);
                     tmp4.push(response[i].plateloadedmachines);
                     tmp5.push(response[i].heavyweightroom);
-                    if(isNaN(response[i].mpr1)) {
-                        tmp6.push(0);
-                    }
-                    else {
-                        tmp6.push(response[i].mpr1);
-                    }
-                    if(isNaN(response[i].mpr2)) {
-                        tmp7.push(0);
-                    }
-                    else {
-                        tmp7.push(response[i].mpr2);
-                    }
-
+                    // Checks if room is in use by a party
+                    if(isNaN(response[i].mpr1)) {tmp6.push(0);}
+                    else {tmp6.push(response[i].mpr1);}
+                    // Make sure room is not reserved
+                    if(isNaN(response[i].mpr2)) {tmp7.push(0);}
+                    else {tmp7.push(response[i].mpr2);}
                 }
+                // Sets the state variables from the temporary array (from the database)
                 this.setState({timestamp: tmp1, cardiotheater: tmp2, mainfitnessfloor: tmp3, plateloadedmachines: tmp4, heavyweightroom: tmp5, mpr1: tmp6, mpr2: tmp7, data: response})
             });
         }
 
-        //End initialization
-
-        let backdrop = 1;
-        if(this.state.sideDrawerOpen) {
-            backdrop = <Backdrop click={this.backdropClickHandler}/>
-        }
+        // let backdrop = 1;
+        // if(this.state.sideDrawerOpen) {
+        //     backdrop = <Backdrop click={this.backdropClickHandler}/>
+        // }
 
         return (
             <div style={{height: '100%'}}>
                 <Toolbar drawerClickHandler={this.drawerToggleClickHandler}/>
-                <SideDrawer show={this.state.sideDrawerOpen}/>
-                {Backdrop}
                 <main style={{marginTop: '64px'}}>
 
                 </main>
@@ -181,7 +174,8 @@ class App extends Component {
                                 <GraphSmall mode="MPR1" data={getTodaysData(this.state.timestamp, this.state.mpr1)}/>
                                 <GraphSmall mode="MPR2" data={getTodaysData(this.state.timestamp, this.state.mpr2)}/>
                         </div>
-                        <About/>
+                        <hr/>
+                        <p><About/></p>
                         </div>
                     )}
 
@@ -189,7 +183,5 @@ class App extends Component {
             </div>
         );
     }
-
 }
-
 export default App;
