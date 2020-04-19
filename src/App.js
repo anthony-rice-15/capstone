@@ -56,7 +56,6 @@ function convertTimestamp(timestamp) {
             month = '00';
             break;
     }
-
     return (day + '/' + month + '/' + year + ' ' + time);
 }
 
@@ -134,16 +133,11 @@ class App extends Component {
 
         //End initialization
 
-        let backdrop = 1;
-        if(this.state.sideDrawerOpen) {
-            backdrop = <Backdrop click={this.backdropClickHandler}/>
-        }
-
         return (
             <div style={{height: '100%'}}>
-                <Toolbar drawerClickHandler={this.drawerToggleClickHandler}/>
-                <SideDrawer show={this.state.sideDrawerOpen} />
-                {Backdrop}
+
+                {<Toolbar drawerClickHandler={this.drawerToggleClickHandler}/>}
+
                 <main style={{marginTop: '64px'}}>
 
                 </main>
@@ -162,12 +156,8 @@ class App extends Component {
                         <About/>
                         </div>
                     )}
-
-
             </div>
         );
     }
-
 }
-
 export default App;
