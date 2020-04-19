@@ -2,8 +2,6 @@ import React from "react";
 
 import './About.css';
 
-// TODO fix formatting
-
 const About = props  => {
   return (
    <div className="about_paragraph">

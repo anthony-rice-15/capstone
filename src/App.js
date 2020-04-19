@@ -3,8 +3,6 @@ import './App.css';
 import Graph from "./components/Graph/Graph";
 import GraphSmall from "./components/Graph/GraphSmall";
 import Toolbar from './components/Toolbar/Toolbar';
-import SideDrawer from './components/SideDrawer/SideDrawer';
-import Backdrop from './components/Backdrop/Backdrop';
 import About from './components/About/About';
 import {Stitch, AnonymousCredential, RemoteMongoClient} from "mongodb-stitch-browser-sdk";
 
@@ -97,15 +95,6 @@ class App extends Component {
         mpr2: null
     }
 
-    // drawerToggleClickHandler = () => {
-    //     this.setState((prevState) => {
-    //         return {sideDrawerOpen: !prevState.sideDrawerOpen}
-    //     })
-    // };
-    // backdropClickHandler = () => {
-    //   this.setState({sideDrawerOpen: false})
-    // };
-
     render() {
         //Initialize client and database
         if(this.state.client == null) {
@@ -150,14 +139,9 @@ class App extends Component {
             });
         }
 
-        // let backdrop = 1;
-        // if(this.state.sideDrawerOpen) {
-        //     backdrop = <Backdrop click={this.backdropClickHandler}/>
-        // }
-
         return (
             <div style={{height: '100%'}}>
-                <Toolbar drawerClickHandler={this.drawerToggleClickHandler}/>
+                <Toolbar/>
                 <main style={{marginTop: '64px'}}>
 
                 </main>
@@ -175,11 +159,9 @@ class App extends Component {
                                 <GraphSmall mode="MPR2" data={getTodaysData(this.state.timestamp, this.state.mpr2)}/>
                         </div>
                         <hr/>
-                        <p><About/></p>
+                        <About/>
                         </div>
                     )}
-
-
             </div>
         );
     }
