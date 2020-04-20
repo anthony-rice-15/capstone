@@ -8,14 +8,13 @@ import {
     HorizontalBarSeries, LineSeries, Crosshair
 } from 'react-vis';
 import '../../../node_modules/react-vis/dist/style.css'
+import Hint from "react-vis/es/plot/hint";
+
+const YMAX = 30;
 
 class GraphSmall extends Component{
     state = {
-        crosshairValues: []
-    }
-
-    getTime(timestamp) {
-        console.log(timestamp);
+        value: null
     }
 
     //Function for managing state of crosshair
@@ -23,14 +22,17 @@ class GraphSmall extends Component{
         this.setState({crosshairValues: []});
     }
 
-    //Function for managing state of crosshair
-    _onNearestX = (value, index) => {
-        let tmp = value;
-        this.getTime(value.x);
-        this.setState({crosshairValues: [tmp]})
+    _rememberValue = value => {
+        this.setState({value});
+    };
+
+    getTime(timestamp) {
+        let tmp = timestamp.split(' ');
+        return tmp[0];
     }
 
     render() {
+        const {value} = this.state;
         return (
             <div>
                 {this.props.mode === "MFF" && <h2 style={{textAlign: 'center'}}>Main Fitness Floor</h2>}
@@ -44,16 +46,28 @@ class GraphSmall extends Component{
                         xType="time"
                         width={400}
                         height={400}
-                        yDomain={[0, 30]}
+                        yDomain={[0, YMAX]}
                         onMouseLeave={this._onMouseLeave}>
                         <LineSeries
                             data={this.props.data}
                             color={"#0A2240"}
-                            onNearestX={this._onNearestX}/>
+                            onNearestX={this._rememberValue}/>
                         <XAxis title="Time" tickTotal={4}/>
                         <YAxis title="People"/>
-                        <Crosshair
-                        values={this.state.crosshairValues}/>
+                        {value ? (
+                            <LineSeries
+                                data={[{x: value.x, y: value.y}, {x: value.x, y: YMAX}]}
+                                stroke="black"
+                            />
+                        ) : null}
+                        {value ? (
+                            <Hint
+                                value={value}
+                                align={{horizontal: Hint.ALIGN.AUTO, vertical: Hint.ALIGN.TOP_EDGE}}
+                            >
+                                <div className="rv-hint__content">{`Time: ${this.getTime(value.x.toTimeString())}`} <br/> {`People: ${Math.trunc(value.y)}`}</div>
+                            </Hint>
+                        ) : null}
                     </XYPlot>
                 </div>
             </div>
