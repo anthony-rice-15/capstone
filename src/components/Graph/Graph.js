@@ -49,7 +49,7 @@ class Graph extends Component {
                             onNearestX={this._rememberValue}
                         />
                         <XAxis />
-                        <YAxis title="People"/>
+                        <YAxis title="# of People"/>
                         {/* Create the hint, assigns value and location*/}
                         {value ? (
                             <Hint
