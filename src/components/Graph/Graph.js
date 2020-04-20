@@ -13,7 +13,7 @@ const Graph = (props) => {
                     height={400}
                     yDomain={[0,30]}
                     color={"#0A2240"}>
-                    <HorizontalGridLines />
+                    <HorizontalGridLines/>
                     <VerticalGridLines/>
                     <VerticalBarSeries
                         data={[

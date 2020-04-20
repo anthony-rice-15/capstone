@@ -27,8 +27,8 @@ const GraphSmall = (props) => {
                         <LineSeries
                             data={props.data}
                             color={"#0A2240"}/>
-                        <XAxis title="X Axis" tickTotal={4}/>
-                        <YAxis title="Y Axis"/>
+                        <XAxis title="Time" tickTotal={4}/>
+                        <YAxis title="People"/>
                     </XYPlot>
             </div>
         </div>
