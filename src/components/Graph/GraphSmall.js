@@ -19,7 +19,7 @@ class GraphSmall extends Component{
 
     //Function for managing state of crosshair
     _onMouseLeave = () => {
-        this.setState({crosshairValues: []});
+        this.setState({value: null});
     }
 
     _rememberValue = value => {
