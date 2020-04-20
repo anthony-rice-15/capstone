@@ -50,8 +50,8 @@ class GraphSmall extends Component{
                             data={this.props.data}
                             color={"#0A2240"}
                             onNearestX={this._onNearestX}/>
-                        <XAxis title="X Axis" tickTotal={4}/>
-                        <YAxis title="Y Axis"/>
+                        <XAxis title="Time" tickTotal={4}/>
+                        <YAxis title="People"/>
                         <Crosshair
                         values={this.state.crosshairValues}/>
                     </XYPlot>
