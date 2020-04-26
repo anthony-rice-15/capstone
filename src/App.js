@@ -106,9 +106,9 @@ class App extends Component {
                     tmp5.push(response[i].heavyweightroom);
                     // Check if the multipurpose rooms are in use by a party
                     // (reserved)
-                    if(isNaN(response[i].mpr1)) {tmp6.push(0);}
+                    if(isNaN(response[i].mpr1)) {tmp6.push(-1);}
                     else {tmp6.push(response[i].mpr1);}
-                    if(isNaN(response[i].mpr2)) {tmp7.push(0);}
+                    if(isNaN(response[i].mpr2)) {tmp7.push(-1);}
                     else {tmp7.push(response[i].mpr2);}
                 }
                 // Assigns the state variables from the temporary array (from the database)
