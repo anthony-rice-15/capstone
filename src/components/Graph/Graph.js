@@ -27,8 +27,8 @@ class Graph extends Component {
                     {/* Set the size/layout of the graph */}
                     <XYPlot
                         xType="ordinal"
-                        width={400}
-                        height={400}
+                        width={350}
+                        height={350}
                         yDomain={[0, 30]}
                         onMouseLeave={this._onMouseLeave}
                         color={"#0A2240"}>

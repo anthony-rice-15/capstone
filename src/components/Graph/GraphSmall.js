@@ -41,11 +41,12 @@ class GraphSmall extends Component{
                 {this.props.mode === "HWR" && <h2 style={{textAlign: 'center'}}>Heavy Weight Room</h2>}
                 {this.props.mode === "MPR1" && <h2 style={{textAlign: 'center'}}>Multipurpose Room 1</h2>}
                 {this.props.mode === "MPR2" && <h2 style={{textAlign: 'center'}}>Multipurpose Room 2</h2>}
+                {this.props.data.length === 0 && <h3 style={{textAlign: 'center'}}>There is no data for today yet!</h3> }
                 <div className="GraphSmall">
                     <XYPlot
                         xType="time"
-                        width={400}
-                        height={400}
+                        width={350}
+                        height={350}
                         yDomain={[0, YMAX]}
                         onMouseLeave={this._onMouseLeave}>
                         <LineSeries

@@ -43,15 +43,23 @@ function getTime(timestamp) {
     let tmp = timestamp.split(' ');
     return tmp[1];
 }
+//returns true if the timestamp corresponds to the current day
+function datesAreOnSameDay(timestamp) {
+    let currentDay = new Date();
+    let tmpTimestamp = new Date(timestamp);
+    if(currentDay.getDate() === tmpTimestamp.getDate() && currentDay.getMonth() === tmpTimestamp.getMonth() && currentDay.getFullYear() === tmpTimestamp.getFullYear()) {
+        return true;
+    }
+    return false;
+}
 // returns the current data
 function getTodaysData(timestamps, dataset) {
     let tmp = [];
     for(let i = 0; i < timestamps.length; i++) {
-        if(getDate(timestamps[i]) === '04/15/2020') {
+        if(datesAreOnSameDay(timestamps[i])) {
             tmp.push({x: new Date(timestamps[i]), y:dataset[i]})
         }
     }
-    console.log(tmp);
     return tmp;
 }
 
