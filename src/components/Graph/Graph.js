@@ -57,7 +57,8 @@ class Graph extends Component {
                                 align={{horizontal: 'auto', vertical: 'top'}}
                             >
                                 {/* Sets the type of hint and declares the value type*/}
-                                <div className="rv-hint__content">{`People: ${Math.trunc(value.y)}`}</div>
+                                {value.y !== 0.1 && <div className="rv-hint__content">{`People: ${Math.trunc(value.y)}`}</div>}
+                                {value.y === 0.1 && <div className="rv-hint__content">{`The room is reserved at this time`}</div>}
                             </Hint>
                         ) : null}
                     </XYPlot>
