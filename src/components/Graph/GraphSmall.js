@@ -66,7 +66,8 @@ class GraphSmall extends Component{
                                 value={value}
                                 align={{horizontal: Hint.ALIGN.AUTO, vertical: Hint.ALIGN.TOP_EDGE}}
                             >
-                                <div className="rv-hint__content">{`Time: ${this.getTime(value.x.toTimeString())}`} <br/> {`People: ${Math.trunc(value.y)}`}</div>
+                                {value.y !== 0.1 && <div className="rv-hint__content">{`Time: ${this.getTime(value.x.toTimeString())}`} <br/> {`People: ${Math.trunc(value.y)}`}</div>}
+                                {value.y === 0.1 && <div className="rv-hint__content">{`The room is reserved at this time`}</div>}
                             </Hint>
                         ) : null}
                     </XYPlot>
